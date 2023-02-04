@@ -68,7 +68,6 @@ contract OTT is ERC721 {
         string memory _contentDesc,
         string memory _contentThumbnailURI,
         string memory _contentURI,
-        string memory _tokenURI,
         uint256 _price
     ) external {
         ContentCounter++;
