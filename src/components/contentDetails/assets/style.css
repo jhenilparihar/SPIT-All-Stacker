@@ -6,14 +6,14 @@
   padding-left:215px;
 }
 .detail-page__nft-image_section {
-  width: 40%;
+  width: 100%;
 }
 .detail-page__nft-image {
   border-radius: 10px;
   border: 1px solid rgb(21, 27, 34);
   overflow: hidden;
   padding: 0;
-  margin: 15px 10px 15px 20px;
+  margin: 15px 10px 15px 0;
 }
 .nft-image-header {
   display: flex;
@@ -174,12 +174,10 @@
   display: inline;
 }
 .eth_icon {
-  filter: brightness(3);
-  width: 24px;
+  width: 46px;
   height: 24px;
   margin: 0;
   padding: 0;
-  margin-bottom: 15px;
 }
 .eth_price {
   font-size: 30px;
@@ -270,3 +268,79 @@
   margin-top: 10px;
   margin-left: 10px;
 }
+
+
+.home{
+  position: relative;
+  width: 100%;
+  min-height: 62vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background: #FFC300;
+ }
+ .home video{
+  z-index: 000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+ }
+ 
+ .home:before{
+  z-index: 777;
+  content: '';
+  position: absolute;
+  background: rgba(255, 195, 0 , 0.1);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+ }
+ 
+ .home .content{
+  z-index: 888;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  padding: 5px;
+  width: 70%;
+  margin-top: 50px;
+ }
+ 
+ .home .content h1{
+   color: #77f47f;
+  font-size: 4em;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  line-height: 75px;
+  margin-bottom: 40px;
+ }
+ 
+ .home .content h1 span{
+   color: #000000;
+  font-size: 1.2em;
+  font-weight: 600;
+ }
+ 
+ .home .content p{
+   color: #000000;
+  margin-bottom: 65px;
+ }
+ 
+ .video-slide{
+  position: absolute;
+  width: 100%;
+  clip-path: circle(0% at 50% 50%);
+ }
+ 
+ .video-slide.active{
+  clip-path: circle(170.7% at 50% 50%);
+  transition: 2s ease;
+  transition-property: clip-path;
+ }
+ .share_div_ {
+  float: right;
+ }

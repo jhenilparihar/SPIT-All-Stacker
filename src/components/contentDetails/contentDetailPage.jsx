@@ -6,6 +6,7 @@ import eth from "./assets/eth.svg";
 import wallet from "./assets/wallet.png";
 import share from "./assets/share.png";
 import content from "./assets/content.png";
+import { Player } from "video-react";
 
 class ContentDetailPage extends Component {
   constructor(props) {
@@ -15,24 +16,36 @@ class ContentDetailPage extends Component {
     };
   }
 
-//   callChangeTokenPriceFromApp = (tokenId, newPrice) => {
-//     this.props.changeTokenPrice(tokenId, newPrice);
-//   };
+  //   callChangeTokenPriceFromApp = (tokenId, newPrice) => {
+  //     this.props.changeTokenPrice(tokenId, newPrice);
+  //   };
   render() {
     return (
       <>
         <div class="details-main">
           <div className="row">
-            <div class="col col-sm-12 detail-page__nft-image_section">
-              <div className="row detail-page__nft-image">
-                <div className="row nft-image-header">
-                  <img class="eth-small" src={eth} alt="" />
-                </div>
-                <div className="row nft-image-div">
-                  <iframe src={this.props.content.contentThumbnailURI} alt=""></iframe>
-                </div>
+            <div class="detail-page__nft-image_section">
+              <div className="detail-page__nft-image">
+                <section class="home">
+                  <video
+                    class="video-slide active"
+                    id="yes"
+                    src={this.props.content.contentThumbnailURI}
+                    type="video/mp4"
+                    autoPlay
+                    muted
+                    loop
+                  ></video>
+                  <div class="content active">
+                    <h1>
+                      {this.props.content.contentName}
+                      <br />
+                    </h1>
+                    <p>{this.props.content.contentDesc} </p>
+                  </div>
+                </section>
               </div>
-              <div className="row price_row detail_section">
+              {/* <div className="row price_row detail_section">
                 <div className="row created_on div_title">
                   <img class="description_image" src={content} alt="" />
                   Description
@@ -52,22 +65,22 @@ class ContentDetailPage extends Component {
                     )}
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div class="col col-sm-12 nft-item-details">
               <div className="row">
                 <div className="col-10 creator_details">
                   {/* <Link to={"/profile/" + this.props.content.currentOwner}> */}
-                    <p class="creator-name" href="">
-                      {this.props.content.currentOwner}
-                    </p>
+                  {/* <p class="creator-name" href="">
+                    {this.props.content.currentOwner}
+                  </p> */}
                   {/* </Link> */}
                 </div>
-                <div className="col">
+                {/* <div className="col share_div_">
                   <div className="row nft-details-share">
                     <img src={share} height="25px" alt="" />
                   </div>
-                </div>
+                </div> */}
                 <h1 className="nft_name">
                   {this.props.content.contentName} #
                   {this.props.content.contentType}
@@ -76,17 +89,14 @@ class ContentDetailPage extends Component {
                   <span>
                     Owned by{" "}
                     {/* <Link to={"/profile/" + this.props.content.currentOwner}> */}
-                      {this.props.content.currentOwner}
+                    {this.props.content.currentOwner}
                     {/* </Link> */}
                   </span>
                 </div>
                 <div className="row price_row">
-                  <div className="row created_on">
-                    Created on 2 Feb, 2023
-                  </div>
-                  <div className="row price_div">
-                    <div className="row price-header">Current price</div>
-                    <div className="row assets-price-detail">
+                  <div className="created_on">
+                    <span className="row eth_price">Price : </span>
+                    <div className="assets-price-detail">
                       <img src={eth} class="eth_icon" alt=""></img>
                       <span class="eth_price">
                         {window.web3.utils.fromWei(
@@ -94,27 +104,27 @@ class ContentDetailPage extends Component {
                           "Ether"
                         )}{" "}
                       </span>
-                      <span class="dollar_price">($162.52)</span>
                     </div>
+                  </div>
+                  <div className="row price_div">
                     <div className="row">
                       {this.props.accountAddress !==
                       this.props.content.currentOwner ? (
-                        
-                          <button
-                            class="buy_now-btn"
-                            value={this.props.content.price}
-                            onClick={(e) =>
-                              this.props.buySubscription(
-                                this.props.content,
-                                parseInt(this.props.content.contentId),
-                                e.target.value,
-                                this.props.accountAddress,
-                              )
-                            }
-                          >
-                            <img class="wallet_icon" src={wallet} alt=""></img>
-                            Buy now
-                          </button>
+                        <button
+                          class="buy_now-btn"
+                          value={this.props.content.price}
+                          onClick={(e) =>
+                            this.props.buySubscription(
+                              this.props.content,
+                              parseInt(this.props.content.contentId),
+                              e.target.value,
+                              this.props.accountAddress
+                            )
+                          }
+                        >
+                          <img class="wallet_icon" src={wallet} alt=""></img>
+                          Subscribe now
+                        </button>
                       ) : null}
                     </div>
                   </div>

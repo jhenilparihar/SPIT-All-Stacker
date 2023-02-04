@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { Link } from 'react-router-dom'
 import './SideBar.css'
 
 class SideBar extends Component {
@@ -16,17 +17,17 @@ class SideBar extends Component {
 					<div className="navigation">
 						<ul>
 							<li>
-								<a href="#">
+								<Link to="/">
 									<span className="fa fa-home"></span>
 									<span>Home</span>
-								</a>
+								</Link>
 							</li>
 							
 							<li>
-								<a href="#">
+							<Link to="/search">
 									<span className="fa fa-search"></span>
 									<span>Search</span>
-								</a>
+								</Link>
 							</li>
 							
 							<li>
