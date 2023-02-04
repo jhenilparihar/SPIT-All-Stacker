@@ -8,16 +8,16 @@ import './VideoPlayer.css';
 <link rel="stylesheet" href="/css/video-react.css"/>
 
 
-export class VideoPlayer extends Component {
+class VideoPlayer extends Component {
+
 	render() {
 		return (
-			<div>Hello World
+			<div class="video-div">
 				<Player
-					
 					autoPlay={true}
 					playsInline
 					poster="/assets/poster.png"
-					src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
+					src={this.props.content.contentURI}
 					
 				/>
 			</div>
