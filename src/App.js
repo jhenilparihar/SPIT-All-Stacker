@@ -348,13 +348,21 @@ class App extends Component {
                   path="/"
                   element={
                     <>
-                      <TopNav />
-                      <SideBar />
+                      {/* <TopNav /> */}
+                      {/* <SideBar /> */}
                       <Outlet />
                     </>
                   }
                 >
-                  <Route index element={<Home/>} />
+                  <Route index element={
+                  <>
+                  <TopNav 
+                  currentProfile={this.state.currentProfile}
+                  /> 
+                    <SideBar /> 
+                  <Home/>
+                  </>
+                  } />
 
                   <Route
                     path="marketplace"
@@ -369,7 +377,12 @@ class App extends Component {
 
                   <Route
                     path="create"
-                    element={<Create1 createContent={this.createContent} />}
+                    element={<>
+                    <TopNav 
+                    currentProfile={this.state.currentProfile}
+                    /> 
+                      <SideBar /> 
+                    <Create1 createContent={this.createContent} /></>}
                   />
                   
                   

@@ -1,3 +1,6 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
 :root {
   scroll-behavior: smooth;
 }
@@ -104,7 +107,8 @@ body {
   }
   
   .des-group {
-    margin: 20px 0;
+    /* margin: 20px 0; */
+    padding: 35px 0 0 0;
   }
   
   textarea {
@@ -164,3 +168,369 @@ body {
   .banner-image1{
     margin: 20px 0;
   }
+  .dropdown1 {
+    height: 10px;
+    min-width: 15rem;
+    position: relative;
+    width: 72%;
+    margin: 28px 0 48px 0;
+    min-width: 15rem;
+    position: relative;
+   
+  }
+  .dropdown1 * {
+    box-sizing: border-box;
+  }
+  .select1 {
+    background: #2a2f3b;
+    height: 55px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px #2a3f3b solid;
+    border-radius: 0.5rem;
+    padding: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin: 20px 0 50px 0;
+  }
+  .selected {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .select-clicked {
+    border: 2px #26489a solid;
+    box-shadow: 0 0 0.8em #26489a;
+  }
+  .select1:hover {
+    background: #323741;
+  }
+  .caret {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #fff;
+    transition: 0.3s;
+  }
+  .explore-menu {
+    list-style: none;
+    padding: 0.2em 0.5em;
+    background-color: rgba(53, 56, 64, 0.8);
+    backdrop-filter: blur(15px);
+    border: 1px #363a43;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
+    border-radius: 0.5em;
+    color: white;
+    position: absolute;
+    /* top: 3em; */
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%);
+    opacity: 0;
+    display: none;
+    transition: 0.2s;
+    z-index: 1;
+  }
+  .explore-menu li {
+    padding: 0.7em 0.5em;
+    margin: 0.3em 0;
+    border-radius: 0.5em;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .explore-menu li:hover {
+    background: #2a2d35;
+  }
+  .active {
+    background: #23242a;
+  }
+  .menu-open {
+    display: block;
+    opacity: 1;
+  }
+
+
+  /*  */
+  /*  */
+
+
+.user {
+  width: 250px;
+  position: relative;
+}
+.user-trigger {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0px 3px 4px -5px rgba(24, 24, 28, 0.03), 0px 1px 2px rgba(24, 24, 28, 0.04);
+  border-radius: 6px;
+  transition: 0.2s ease;
+  outline: 2px solid transparent;
+  margin-top: 6px;
+}
+.user-trigger .avatar {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.user-trigger .avatar img {
+  max-width: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+.user-trigger .detail {
+  margin-right: auto;
+  font: 400 14px/18px "Inter";
+  color: #5f5f61;
+}
+.user-trigger .detail strong {
+  font-weight: 600;
+  display: block;
+  letter-spacing: -0.05px;
+  color: #222124;
+}
+.user-trigger:focus-within {
+  outline: 2px solid #2080f7;
+}
+.user-container {
+  background: #ffffff;
+  border: 1px solid #efefef;
+  box-shadow: 0px 3px 4px -5px rgba(24, 24, 28, 0.03), 0px 1px 2px rgba(24, 24, 28, 0.04);
+  display: none;
+  margin-top: 8px;
+  border-radius: 6px;
+  padding: 10px;
+}
+.user-container a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-right: auto;
+  font: 400 14px/18px "Inter";
+  color: #5f5f61;
+}
+.user-container a svg,
+.user-container a img {
+  width: 24px;
+  height: 24px;
+}
+.user-container a strong {
+  font-weight: 500;
+  letter-spacing: -0.05px;
+  color: #222124;
+}
+.user-container a:hover {
+  background: #f6f6f6;
+}
+
+.btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  cursor: pointer;
+  padding: 0px 14px;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0px 3px 4px -5px rgba(24, 24, 28, 0.03), 0px 1px 2px rgba(24, 24, 28, 0.04);
+  border-radius: 8px;
+  letter-spacing: -0.05px;
+  color: #222124;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  transition: 0.2s ease;
+}
+.btn-default {
+  border-color: transparent;
+  background: transparent;
+  color: #000;
+}
+.btn-default:hover {
+  background: #f6f6f6;
+}
+.btn-default:focus {
+  background: #ffffff;
+  box-shadow: 0px 0px 0px 3px rgba(86, 97, 129, 0.15);
+}
+.btn.squared {
+  padding: 0;
+  width: 36px;
+  height: 36px;
+}
+.mystyle{
+  display: block;
+}
+
+/*  */
+.variants {
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+}
+
+.variants > div {
+  margin-right: 5px;
+}
+
+.variants > div:last-of-type {
+  margin-right: 0;
+}
+
+.file {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.file > input[type='file'] {
+  display: none
+}
+
+.file > label {
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: 0;
+  user-select: none;
+  border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+  border-style: solid;
+  border-radius: 4px;
+  border-width: 1px;
+  background-color: hsl(0, 0%, 100%);
+  /* background-color: rgba(255,255,255,0.4); */
+  color: hsl(0, 0%, 29%);
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  height: 30px;
+  width: 140px;
+}
+
+.file > label:hover {
+  border-color: hsl(0, 0%, 21%);
+}
+
+.file > label:active {
+  background-color: hsl(0, 0%, 96%);
+}
+
+.file > label > i {
+  padding-right: 5px;
+}
+
+.file--upload > label {
+  /* color: hsl(204, 86%, 53%);
+  border-color: hsl(204, 86%, 53%); */
+  border-color: hsl(48, 100%, 67%);
+  background-color: hsl(48, 100%, 96%);
+}
+
+.file--upload > label:hover {
+  /* border-color: hsl(204, 86%, 53%);
+  background-color: hsl(204, 86%, 96%); */
+  border-color: hsl(48, 100%, 67%);
+  background-color: hsl(48, 100%, 96%);
+}
+
+.file--upload > label:active {
+  background-color: hsl(204, 86%, 91%);
+}
+
+.file--uploading > label {
+  color: hsl(204, 86%, 53%);
+  border-color: hsl(204, 86%, 53%);
+  width: 190px;
+  /* color: hsl(48, 100%, 67%);
+  border-color: hsl(48, 100%, 67%); */
+}
+
+.file--uploading > label > i {
+  animation: pulse 5s infinite;
+}
+
+.file--uploading > label:hover {
+  color: hsl(204, 86%, 53%);
+  border-color: hsl(204, 86%, 53%);
+  /* border-color: hsl(48, 100%, 67%);
+  background-color: hsl(48, 100%, 96%); */
+}
+
+.file--uploading > label:active {
+  background-color: hsl(48, 100%, 91%);
+}
+
+.file--success > label {
+  color: hsl(141, 71%, 48%);
+  border-color: hsl(141, 71%, 48%);
+}
+
+.file--success > label:hover {
+  border-color: hsl(141, 71%, 48%);
+  background-color: hsl(141, 71%, 96%);
+}
+
+.file--success > label:active {
+  background-color: hsl(141, 71%, 91%);
+}
+
+.file--danger > label {
+  color: hsl(348, 100%, 61%);
+  border-color: hsl(348, 100%, 61%);
+}
+
+.file--danger > label:hover {
+  border-color: hsl(348, 100%, 61%);
+  background-color: hsl(348, 100%, 96%);
+}
+
+.file--danger > label:active {
+  background-color: hsl(348, 100%, 91%);
+}
+
+.file--disabled {
+  cursor: not-allowed;
+}
+
+.file--disabled > label {
+  border-color: #e6e7ef;
+  color: #e6e7ef;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0% {
+    color: hsl(48, 100%, 67%);
+  }
+  50% {
+    color: hsl(48, 100%, 38%);
+  }
+  100% {
+    color: hsl(48, 100%, 67%);
+  }
+}
+#unique{
+  color: rgb(129, 162, 239);;
+}
+#unique1{
+  color: rgb(238, 178, 123);
+}
