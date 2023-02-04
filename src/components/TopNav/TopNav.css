@@ -2,7 +2,7 @@
 .topbar {
     display: flex;
     justify-content: space-between;
-    background-color: #101010;
+    /* background-color: white; */
     padding: 14px 30px;
 }
 .topbar .prev-next-buttons button {
@@ -62,4 +62,32 @@
 .topbar .navbar button:active,
 .topbar .navbar button:focus {
     background-color: #f2f2f2;
+}
+
+.prof1-img{
+    /* background: red; */
+    width: 34px;
+    height: 33px;
+    border-radius: 47px;
+}
+.prof1-button{
+    /* background-color: yellow;  */
+    width: 152px; 
+    height: 33px; 
+    border-radius: 47px;
+    position: relative;
+    cursor: pointer;
+}
+.uname{
+    position: absolute;
+    right: 22px;
+    top: 24%;
+    color: white;
+}
+.prof1-img img{
+width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 47px;
 }
