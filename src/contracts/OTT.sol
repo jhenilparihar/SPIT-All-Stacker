@@ -24,11 +24,12 @@ contract OTT is ERC721 {
         uint256 contentId;
         string contentName;
         string contentType;
+        string contentCategory;
         string contentDesc; 
         string subcribedUser;
         string contentThumbnailURI;
+        string contentImage;
         string contentURI;
-        string contentTokenURI;
         address payable currentOwner;
         uint256 price;
         uint256 numberOfViewer;
@@ -65,10 +66,11 @@ struct UserProfile {
     function createContent(
         string memory _name,
         string memory _contentType,
+        string memory _contentCategory,
         string memory _contentDesc,
         string memory _contentThumbnailURI,
+        string memory _contentImage,
         string memory _contentURI,
-        string memory _contentTokenURI,
         uint256 _price
     ) external {
         ContentCounter++;
@@ -87,11 +89,12 @@ struct UserProfile {
             ContentCounter,
             _name,
             _contentType,
+            _contentCategory,
             _contentDesc,
             "",
             _contentThumbnailURI,
+            _contentImage,
             _contentURI,
-            _contentTokenURI,
             msg.sender,
             _price,
             0
