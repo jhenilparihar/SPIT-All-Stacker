@@ -46,14 +46,14 @@ class Create1 extends Component {
       console.log('Error uploading file: ', error)
     }
   }
-  ontChange = async (e) => {
+  onthumbChange = async (e) => {
     const file = e.target.files[0]
     try {
       const added = await client.add(file)
       const url = `https://infura-ipfs.io/ipfs/${added.path}`
       this.setState({ thumbUrl: url })
       //   updateFileUrl(url)
-      console.log("IPFS URI of trailer: ", url)
+      console.log("IPFS URI of thumb:", url)
     } catch (error) {
       console.log('Error uploading file: ', error)
     }
@@ -124,9 +124,11 @@ class Create1 extends Component {
     this.props.createContent(
       this.state.NFTName,
       "Horror",
-      this.state.description,
+      this.state.category,
+      this.state.description, 
       this.state.trailerUrl,
       this.state.fileUrl,
+      this.state.thumbUrl,
       this.state.NFTPrice,
     );
   };
@@ -234,7 +236,7 @@ class Create1 extends Component {
                         <label for='input-file'>
                           Upload 
                         </label>
-                        <input id='input-file' type='file' onChange={this.ontChange}/>
+                        <input id='input-file' type='file' onChange={this.onthumbChange}/>
                       </div>
                     </div>
                     {/* <input
