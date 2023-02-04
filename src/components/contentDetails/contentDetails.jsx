@@ -1,5 +1,6 @@
 import React from "react";
 // import NFTDetails from "./NFT-Details";
+import VideoPlayer from "../VideoPlayer/VideoPlayer";
 import { useParams } from "react-router-dom";
 import ContentDetailPage from "./contentDetailPage";
 
@@ -17,7 +18,9 @@ const ContentDetails = ({ AllContent, accountAddress, buySubscription }) => {
   return (
     <>
       {accessAddress.includes(accountAddress) ? (
-        <h1>Hello</h1>
+        <VideoPlayer
+        content={content}
+        />
       ) : (
         <ContentDetailPage
           content={content}
