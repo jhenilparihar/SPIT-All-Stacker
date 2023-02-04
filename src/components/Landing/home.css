@@ -1,117 +1,129 @@
 * {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 body {
-    background-color: #121212;
-    font-family: 'Montserrat', sans-serif;
+  background-color: #121212;
+  font-family: "Montserrat", sans-serif;
 }
 
-
 .main-container {
-    margin-left: 245px;
-    margin-bottom: 100px;
+  margin-left: 245px;
+  margin-bottom: 100px;
 }
 
 .spotify-playlists {
-    padding: 20px 40px;
+  padding: 20px 40px;
 }
 .spotify-playlists h2 {
-    color: #ffffff;
-    font-size: 22px;
-    margin-bottom: 20px;
+  color: #ffffff;
+  font-size: 22px;
+  margin-bottom: 20px;
 }
 .spotify-playlists .list {
-    display: flex;
-    gap: 20px;
-    /*overflow: hidden;*/
-    overflow: scroll;
+  display: flex;
+  gap: 20px;
+  /*overflow: hidden;*/
+  overflow: scroll;
 }
 .spotify-playlists .list::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 .spotify-playlists .list .item {
-    min-width: 140px;
-    width: 160px;
-    padding: 15px;
-    background-color: #181818;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all ease 0.4s;
+  min-width: 140px;
+  width: 259px;
+  padding: 15px;
+  background-color: #181818;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all ease 0.4s;
 }
 .spotify-playlists .list .item:hover {
-    background-color: #252525;
+  background-color: #252525;
 }
-.spotify-playlists .list .item img {
-    width: 100%;
-    border-radius: 6px;
-    margin-bottom: 10px;
+.spotify-playlists .list .item .banner-image {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 10px;
 }
 .spotify-playlists .list .item .play {
-    position: relative;
+  position: relative;
 }
 .spotify-playlists .list .item .play .fa {
-    position: absolute;
-    right: 10px;
-    top: -60px;
-    padding: 18px;
-    background-color: #1db954;
-    border-radius: 100%;
-    opacity: 0;
-    transition: all ease 0.4s;
+  position: absolute;
+  right: 10px;
+  top: -60px;
+  padding: 18px;
+  background-color: #1db954;
+  border-radius: 100%;
+  opacity: 0;
+  transition: all ease 0.4s;
 }
 .spotify-playlists .list .item:hover .play .fa {
-    opacity: 1;
-    transform: translateY(-20px);
+  opacity: 1;
+  transform: translateY(-20px);
 }
 .spotify-playlists .list .item h4 {
-    color: #ffffff;
-    font-size: 14px;
-    margin-bottom: 10px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  color: #ffffff;
+  font-size: 14px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .spotify-playlists .list .item p {
-    color: #989898;
-    font-size: 12px;
-    line-height: 20px;
-    font-weight: 600;
+  color: #989898;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 600;
 }
 .spotify-playlists hr {
-    margin: 70px 0px 0px;
-    border-color: #636363;
+  margin: 70px 0px 0px;
+  border-color: #636363;
 }
 
 .preview {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to right, #ae2896, #509bf5);
-    padding: 15px 40px;
-    display: flex;
-    justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to right, #ae2896, #509bf5);
+  padding: 15px 40px;
+  display: flex;
+  justify-content: space-between;
 }
 .preview h6 {
-    color: #ffffff;
-    text-transform: uppercase;
-    font-weight: 400;
-    font-size: 12px;
-    margin-bottom: 10px;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 12px;
+  margin-bottom: 10px;
 }
 .preview p {
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 500;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
 }
 .preview button {
-    background-color: #ffffff;
-    color: #000000;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 14px 30px;
-    border: 0px;
-    border-radius: 40px;
-    cursor: pointer;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 14px 30px;
+  border: 0px;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
+.eth-svg {
+  height: 22px;
+  width: 10%;
+  margin-bottom: -6px;
+  margin-right:5px;
+}
+.item-footer  {
+    margin-top: 3px;
+}
+.item-footer span {
+    font-size:16px;
 }
