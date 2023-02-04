@@ -56,6 +56,20 @@ class Create1 extends Component{
       console.log('Error uploading file: ', error)
     }  
   }
+
+  callCreateFromApp = (e) => {
+    e.preventDefault();
+
+    this.props.createContent(
+      this.state.NFTName,
+      "Horror",
+      this.state.description,
+      this.state.trailerUrl,
+      this.state.fileUrl,
+      this.state.NFTPrice,
+    );
+  };
+
   render() {
   return (
     // <div className="App">
@@ -195,7 +209,7 @@ class Create1 extends Component{
                 </div>
                 <hr></hr>
                 <br />
-                {!this.state.imageIsUpload ? (
+                {!(this.state.fileUrl.length>0 && this.state.trailerUrl.length>0) ? (
                   <button
                     type="submit"
                     class="create-btn create-btn-disabled"
@@ -204,7 +218,7 @@ class Create1 extends Component{
                     Create NFT
                   </button>
                 ) : (
-                  <button type="submit" class="create-btn">
+                  <button type="submit" class="create-btn" onClick={this.callCreateFromApp}>
                     Create NFT
                   </button>
                 )}

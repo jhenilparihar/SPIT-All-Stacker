@@ -13,6 +13,19 @@ import Loading from "./components/Loading/Loading";
 // import NoPage from "./NoPage/NoPage";
 import Create1 from "./components/create/Create1";
 
+const projectId = "2LEiWo06lqrPLBn4x5fxBHwMDgg"
+const projectSecret = "c567bca7714ae367126c8b266fe86cab"
+const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+
+const client = create({
+  host: 'ipfs.infura.io',
+  port: 5001,
+  protocol: 'https',
+  headers: {
+      authorization: auth,
+  },
+})
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +40,7 @@ class App extends Component {
       contractDetected: false,
       totalContentsMinted: 0,
       totalTokensOwnedByAccount: 0,
-      imageIsUsed: false,
+      contentIsUsed: false,
       imageHash: "",
       // lastMintTime: null,
       // currentProfile: "",
@@ -100,7 +113,52 @@ class App extends Component {
     window.location.reload();
   };
 
+  createContent = async (name, type, desc, tumbnailUrl, contentUrl, tokenPrice) => {
+
+    this.setState({ loading: true });
+
+    const contentIsUsed = await this.state.OTTContract.methods
+      .tokenContentExists(contentUrl)
+      .call();
+
+    if (!contentIsUsed) {
+      let previousTokenId;
+      // previousTokenId = await this.state.OTT.methods
+      //   .ContentCounter()
+      //   .call();
+      previousTokenId = this.state.totalContentsMinted;
+      const tokenId = previousTokenId + 1;
+      const tokenObject = {
+        tokenName: "OTT Content",
+        tokenSymbol: "OTT",
+        tokenId: `${tokenId}`,
+        name: name,
+        type: type,
+        imageUrl: contentUrl,
+        description: desc,
+      };
+      const cid = await client.add(JSON.stringify(tokenObject));
+      let tokenURI = `https://ipfs.infura.io/ipfs/${cid.path}`;
+      const price = window.web3.utils.toWei(tokenPrice.toString(), "ether");
+      this.state.OTTContract.methods
+        .createContent(name, type, desc, tumbnailUrl, contentUrl, tokenURI, price)
+        .send({ from: this.state.accountAddress })
+        .on("confirmation", () => {
+          localStorage.setItem(this.state.accountAddress, new Date().getTime());
+          this.setState({ loading: false });
+          window.location.reload();
+        });
+    } else {
+      if (contentIsUsed) {
+        this.setState({ contentIsUsed: true });
+        this.setState({ loading: false });
+      }
+    }
+  };
+
+
   render() {
+    console.log(this.state.contents)
     return (
       <>
         {!this.state.metamaskConnected ? (
@@ -111,7 +169,7 @@ class App extends Component {
           <Loading />
         ) : (
           <>
-            <Create1 />
+            <Create1 createContent={this.createContent}/>
             {/* <BrowserRouter>
               <Routes>
                 <Route

@@ -28,6 +28,7 @@ contract OTT is ERC721 {
         string subcribedUser;
         string contentThumbnailURI;
         string contentURI;
+        string contentTokenURI;
         address payable currentOwner;
         uint256 price;
         uint256 numberOfViewer;
@@ -68,6 +69,7 @@ contract OTT is ERC721 {
         string memory _contentDesc,
         string memory _contentThumbnailURI,
         string memory _contentURI,
+        string memory _contentTokenURI,
         uint256 _price
     ) external {
         ContentCounter++;
@@ -90,6 +92,7 @@ contract OTT is ERC721 {
             "",
             _contentThumbnailURI,
             _contentURI,
+            _contentTokenURI,
             msg.sender,
             _price,
             0
