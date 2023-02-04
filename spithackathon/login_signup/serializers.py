@@ -41,4 +41,10 @@ class contentdetailsserializer(serializers.ModelSerializer):
         model = contentdetails
         fields = '__all__'
 
+class contentratingsserializer(serializers.ModelSerializer):
+    class Meta:
+        model = contentrating
+        fields = '__all__'
+
+
 

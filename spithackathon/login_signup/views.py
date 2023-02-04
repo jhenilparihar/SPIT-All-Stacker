@@ -80,6 +80,52 @@ class contentDetaildetails(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     
-    
+
+class contentrecommendation(generics.ListCreateAPIView):
+    queryset = contentrating.objects.all()
+    serializer_class = contentratingsserializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class ratingreommendation(generics.ListCreateAPIView):
+    queryset = contentrating.objects.all()
+    serializer_class = contentdetailsserializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        contentno = contentrating.objects.all().values_list('content')
+        print(contentno)
+
+        dictnor = contentdetails.objects.filter(id__in=contentno)
+        return dictnor
+
+
+class searchreommendation(generics.ListCreateAPIView):
+    queryset = contentrating.objects.all()
+    serializer_class = contentdetailsserializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+
+        dictnor = contentdetails.objects.filter(Q(title__icontains=query)| Q(description__icontains=query)|Q(adult_rate__icontains=query))
+        return dictnor
+
+
+class moodbasedreommendation(generics.ListCreateAPIView):
+    queryset = contentrating.objects.all()
+    serializer_class = contentdetailsserializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        query = self.request.GET.get('query')
+
+        dictnor = contentdetails.objects.filter(Q(title__icontains=query)| Q(description__icontains=query)|Q(category__icontains=query)|Q(adult_rate__icontains=query))
+        return dictnor
+
+
 
         

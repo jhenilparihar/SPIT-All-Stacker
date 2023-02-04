@@ -41,3 +41,10 @@ class contentdetails(models.Model):
 	trailer = models.FileField(upload_to=path_and_rename_for_resume,null=True,blank=True)
 	main_video = models.FileField(upload_to=path_and_rename_for_resume,null=True,blank=True)
 	rating = models.TextField(null=True,blank=True)
+
+
+class contentrating(models.Model):
+	content =  models.ForeignKey(contentdetails, related_name = 'contentdetails', on_delete=models.CASCADE) 
+	user 	= models.ForeignKey(User, related_name = 'userdetails',on_delete=models.CASCADE)
+	rating  = models.TextField(blank=True, max_length=255)
+
