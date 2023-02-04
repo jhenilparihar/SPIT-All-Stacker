@@ -43,3 +43,43 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
+
+class createprofile(generics.ListCreateAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = profileserializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+    def get_object(self):
+        return self.request.user
+
+class profileDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = profileserializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def retrieve(self,request,pk=None):
+        like = Profile.objects.filter(user_id=pk)
+        data = profileserializer(like,many=True)
+        return Response(data.data)
+
+class createcontentdetails(generics.ListCreateAPIView):
+    queryset = contentdetails.objects.all()
+    serializer_class = contentdetailsserializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save()
+    def get_object(self):
+        return self.request.user
+
+class contentDetaildetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset = contentdetails.objects.all()
+    serializer_class = contentdetailsserializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    
+    
+
+        

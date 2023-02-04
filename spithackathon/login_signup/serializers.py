@@ -30,3 +30,15 @@ class LoginUserSerializer(serializers.Serializer):
         if user and user.is_active:
             return user
         raise serializers.ValidationError("Invalid Details.")
+
+class profileserializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = '__all__'
+
+class contentdetailsserializer(serializers.ModelSerializer):
+    class Meta:
+        model = contentdetails
+        fields = '__all__'
+
+
