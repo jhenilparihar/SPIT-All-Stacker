@@ -36,7 +36,6 @@ const client = create({
   },
 });
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -77,38 +76,20 @@ class App extends Component {
     }
   };
 
-  setMetaData = async () => {
-    if (this.state.contents.length !== 0) {
-      this.state.contents.map(async (nft) => {
-        const result = await fetch(nft.contentTokenURI);
-        const metaData = await result.json();
-        this.setState({
-          contents: this.state.contents.map((nft) =>
-            parseInt(nft.tokenId) === Number(metaData.tokenId)
-              ? {
-                ...nft,
-                metaData,
-              }
-              : nft
-          ),
-        });
-      });
-    }
-  };
   getContentSubscribedUser = async () => {
     if (this.state.contents.length !== 0) {
       this.state.contents.map((nft) => {
-        let stringAddress = nft.subcribedUser
+        let stringAddress = nft.subcribedUser;
         let userAddressArray = stringAddress.split(", ");
         this.setState({
           contents: {
             ...nft,
-            userAddressArray
-          }
-        })
-      })
+            userAddressArray,
+          },
+        });
+      });
     }
-  }
+  };
 
   loadBlockchainData = async () => {
     const web3 = window.web3;
@@ -146,7 +127,6 @@ class App extends Component {
 
         let totalContentsMinted = parseInt(totalContentsMint);
         this.setState({ totalContentsMinted });
-
 
         const isProfileSet = await this.state.OTTContract.methods
           .isProfileSet(this.state.accountAddress)
@@ -188,8 +168,6 @@ class App extends Component {
           );
         }
 
-
-
         const cp = await OTTContract.methods
           .allProfiles(this.state.accountAddress)
           .call();
@@ -200,8 +178,14 @@ class App extends Component {
 
         console.log(ProfileCounter);
 
-        for (var profile_counter = 1; profile_counter <= ProfileCounter; profile_counter++) {
-          const address = await OTTContract.methods.allAddress(profile_counter).call();
+        for (
+          var profile_counter = 1;
+          profile_counter <= ProfileCounter;
+          profile_counter++
+        ) {
+          const address = await OTTContract.methods
+            .allAddress(profile_counter)
+            .call();
           const profile = await OTTContract.methods.allProfiles(address).call();
 
           this.state.allUserProfile[address] = profile;
@@ -225,9 +209,11 @@ class App extends Component {
   createContent = async (
     name,
     type,
+    category,
     desc,
     tumbnailUrl,
     contentUrl,
+    contentImage,
     tokenPrice
   ) => {
     this.setState({ loading: true });
@@ -242,27 +228,28 @@ class App extends Component {
       //   .ContentCounter()
       //   .call();
       previousTokenId = this.state.totalContentsMinted;
-      const tokenId = previousTokenId + 1;
-      const tokenObject = {
-        tokenName: "OTT Content",
-        tokenSymbol: "OTT",
-        tokenId: `${tokenId}`,
-        name: name,
-        type: type,
-        imageUrl: contentUrl,
-        description: desc,
-      };
-      const cid = await client.add(JSON.stringify(tokenObject));
-      let tokenURI = `https://ipfs.infura.io/ipfs/${cid.path}`;
+      // const tokenId = previousTokenId + 1;
+      // const tokenObject = {
+      //   tokenName: "OTT Content",
+      //   tokenSymbol: "OTT",
+      //   tokenId: `${tokenId}`,
+      //   name: name,
+      //   type: type,
+      //   imageUrl: contentUrl,
+      //   description: desc,
+      // };
+      // const cid = await client.add(JSON.stringify(tokenObject));
+      // let tokenURI = `https://ipfs.infura.io/ipfs/${cid.path}`;
       const price = window.web3.utils.toWei(tokenPrice.toString(), "ether");
       this.state.OTTContract.methods
         .createContent(
           name,
           type,
+          category,
           desc,
           tumbnailUrl,
+          contentImage,
           contentUrl,
-          tokenURI,
           price
         )
         .send({ from: this.state.accountAddress })
@@ -295,7 +282,7 @@ class App extends Component {
         this.setState({ loading: false });
         window.location.reload();
       });
-  }
+  };
 
   // profile section
   uploadProfile = async (
@@ -354,7 +341,15 @@ class App extends Component {
                     </>
                   }
                 >
-                  <Route index element={<Home/>} />
+                  <Route
+                    index
+                    element={
+                      <Home
+                        accountAddress={this.state.accountAddress}
+                        AllContents={this.state.contents}
+                      />
+                    }
+                  />
 
                   <Route
                     path="marketplace"
@@ -371,19 +366,10 @@ class App extends Component {
                     path="create"
                     element={<Create1 createContent={this.createContent} />}
                   />
-                  
-                  
+
                   <Route
                     path="content/details/:id"
                     element={
-                      // <NFTDetails
-                      //   accountAddress={this.state.accountAddress}
-                      //   AllNFT={this.state.NFTs}
-                      //   changeTokenPrice={this.changeTokenPrice}
-                      //   toggleForSale={this.toggleForSale}
-                      //   buyNFT={this.buyNFT}
-                      //   allProfile={this.state.allUserProfile}
-                      // />
                       <ContentDetails
                         accountAddress={this.state.accountAddress}
                         AllContent={this.state.contents}
@@ -394,9 +380,7 @@ class App extends Component {
                   <Route
                     path="/profile"
                     element={
-                      <Profile
-                        currentProfile={this.state.currentProfile}
-                      />
+                      <Profile currentProfile={this.state.currentProfile} />
                     }
                   />
                   <Route
@@ -419,7 +403,6 @@ class App extends Component {
       </>
     );
   }
-
 }
 
 export default App;
