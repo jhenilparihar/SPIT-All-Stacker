@@ -341,11 +341,11 @@ class App extends Component {
                     </>
                   }
                 >
-                  <Route index element={<><TopNav 
-                  currentProfile={this.state.currentProfile}
-                  /> 
+                  <Route index element={<><TopNav
+                    currentProfile={this.state.currentProfile}
+                  />
                     <SideBar /><Home accountAddress={this.state.accountAddress}
-                    AllContents={this.state.contents} /></>} />
+                      AllContents={this.state.contents} /></>} />
 
                   <Route
                     path="marketplace"
