@@ -54,8 +54,8 @@ class App extends Component {
 			contentIsUsed: false,
 			imageHash: "",
 			// lastMintTime: null,
-			// currentProfile: "",
-			// allUserProfile: {},
+			currentProfile: "",
+			allUserProfile: {},
 		};
 	}
 	
