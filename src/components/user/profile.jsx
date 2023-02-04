@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import SideBar from "../SideBar/SideBar";
+import TopNav from "../TopNav/TopNav";
 import "./assets/Profile.css";
 import setting from "./assets/setting.png";
 import share from "./assets/share.png";
@@ -16,7 +17,11 @@ class Profile extends Component {
         return (
 
             <>
-                <div class="main">
+            <div className="con">
+                <div className="side">
+                <TopNav />
+                </div>
+                {this.props.currentProfile !== undefined ? (<div class="main">
                     <div class="upper">
                         {this.props.currentProfile.bannerHash !== undefined ? (
                             <img src={this.props.currentProfile.bannerHash} alt="" />
@@ -28,11 +33,11 @@ class Profile extends Component {
                     <div class="details">
                         <div class="details-inner">
                             <div class="prof-img">
-                                {this.props.currentProfile.imageHash !== undefined ? (
+                                {/* {this.props.currentProfile.imageHash !== undefined ? (
                                     <img src={this.props.currentProfile.imageHash} alt="" />
                                 ) : <>
                                     <em>no des</em>
-                                </>}
+                                </>} */}
                                 {/* <input type="file" /> */}
                             </div>
                             <div class="user-details">
@@ -79,7 +84,10 @@ class Profile extends Component {
                         </div>
                     </div>
                     {/* <DisplayNFT AllNFT={AllNFT} profileAddress={currentProfile.user} /> */}
-                </div>
+                </div>):(null)}
+            
+            </div>
+                
             </>
 
 
