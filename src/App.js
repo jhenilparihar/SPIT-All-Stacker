@@ -3,28 +3,34 @@ import { create } from "ipfs-http-client";
 import { Buffer } from "buffer";
 
 import React, { Component } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import './App.css'
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+// import "./components/bootstrap/css/bootstrap.css";
+import "./App.css";
+
 import Web3 from "web3";
 import OTT from "./abis/OTT.json";
 import ContractNotDeployed from "./components/ContractNotDeployed/ContractNotDeployed";
 import ConnectToMetamask from "./components/ConnectMetamask/ConnectToMetamask";
 import Loading from "./components/Loading/Loading";
-// import NoPage from "./NoPage/NoPage";
+import NoPage from "./components/NoPage/NoPage";
 import Create1 from "./components/create/Create1";
+import Marketplace from "./components/Explore/Marketplace";
+import ContentDetails from "./components/contentDetails/contentDetails";
 
-const projectId = "2LEiWo06lqrPLBn4x5fxBHwMDgg"
-const projectSecret = "c567bca7714ae367126c8b266fe86cab"
-const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+
+const projectId = "2LEiWo06lqrPLBn4x5fxBHwMDgg";
+const projectSecret = "c567bca7714ae367126c8b266fe86cab";
+const auth =
+  "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64");
 
 const client = create({
-  host: 'ipfs.infura.io',
+  host: "ipfs.infura.io",
   port: 5001,
-  protocol: 'https',
+  protocol: "https",
   headers: {
-      authorization: auth,
+    authorization: auth,
   },
-})
+});
 
 class App extends Component {
   constructor(props) {
@@ -51,6 +57,7 @@ class App extends Component {
   componentWillMount = async () => {
     await this.loadWeb3();
     await this.loadBlockchainData();
+    // await this.getContentSubscribedUser();
   };
 
   loadWeb3 = async () => {
@@ -64,6 +71,39 @@ class App extends Component {
       );
     }
   };
+
+  setMetaData = async () => {
+    if (this.state.contents.length !== 0) {
+      this.state.contents.map(async (nft) => {
+        const result = await fetch(nft.contentTokenURI);
+        const metaData = await result.json();
+        this.setState({
+          contents: this.state.contents.map((nft) =>
+            parseInt(nft.tokenId) === Number(metaData.tokenId)
+              ? {
+                  ...nft,
+                  metaData,
+                }
+              : nft
+          ),
+        });
+      });
+    }
+  };
+  getContentSubscribedUser = async () => {
+    if (this.state.contents.length !== 0) {
+      this.state.contents.map((nft) => {
+        let stringAddress = nft.subcribedUser
+        let userAddressArray = stringAddress.split(", ");
+        this.setState({
+          contents: {
+            ...nft,
+            userAddressArray
+          }
+        })
+      })
+    }
+  }
 
   loadBlockchainData = async () => {
     const web3 = window.web3;
@@ -94,6 +134,7 @@ class App extends Component {
             contents: [...this.state.contents, content],
           });
         }
+
         let totalContentsMint = await OTTContract.methods
           .getNumberOfContentMinted()
           .call();
@@ -113,8 +154,14 @@ class App extends Component {
     window.location.reload();
   };
 
-  createContent = async (name, type, desc, tumbnailUrl, contentUrl, tokenPrice) => {
-
+  createContent = async (
+    name,
+    type,
+    desc,
+    tumbnailUrl,
+    contentUrl,
+    tokenPrice
+  ) => {
     this.setState({ loading: true });
 
     const contentIsUsed = await this.state.OTTContract.methods
@@ -141,7 +188,15 @@ class App extends Component {
       let tokenURI = `https://ipfs.infura.io/ipfs/${cid.path}`;
       const price = window.web3.utils.toWei(tokenPrice.toString(), "ether");
       this.state.OTTContract.methods
-        .createContent(name, type, desc, tumbnailUrl, contentUrl, tokenURI, price)
+        .createContent(
+          name,
+          type,
+          desc,
+          tumbnailUrl,
+          contentUrl,
+          tokenURI,
+          price
+        )
         .send({ from: this.state.accountAddress })
         .on("confirmation", () => {
           localStorage.setItem(this.state.accountAddress, new Date().getTime());
@@ -156,9 +211,27 @@ class App extends Component {
     }
   };
 
+  buySubscription = async (content, tokenId, price, accountAddress) => {
+    let address;
+    if (content.subcribedUser.length > 0) {
+      address = content.subcribedUser + ", " + this.state.accountAddress;
+    }
+    else {
+      address = this.state.accountAddress;
+    }
+     
+    this.setState({ loading: true });
+    this.state.OTTContract.methods
+      .buyToken(tokenId, address)
+      .send({ from: this.state.accountAddress, value: price })
+      .on("confirmation", () => {
+        this.setState({ loading: false });
+        window.location.reload();
+      });
+  }
 
   render() {
-    console.log(this.state.contents)
+    console.log(this.state.contents);
     return (
       <>
         {!this.state.metamaskConnected ? (
@@ -169,20 +242,76 @@ class App extends Component {
           <Loading />
         ) : (
           <>
-            <Create1 createContent={this.createContent}/>
-            {/* <BrowserRouter>
+            <BrowserRouter>
               <Routes>
                 <Route
                   path="/"
                   element={
-                    <h1>Navbar</h1>
+                    <>
+                      <h1>Navbar</h1>
+                      <Outlet />
+                    </>
                   }
                 >
-                  <Route index element={<Create1 />} />
+                  <Route index element={<h1>Home</h1>} />
+
+                  <Route
+                    path="marketplace"
+                    element={
+                      <Marketplace
+                        accountAddress={this.state.accountAddress}
+                        AllContents={this.state.contents}
+                        totalTokensMinted={this.state.OTTCount}
+                      />
+                    }
+                  />
+
+                  <Route
+                    path="create"
+                    element={<Create1 createContent={this.createContent} />}
+                  />
+                  <Route
+                    path="profile/"
+                    element={
+                      // <UserProfile
+                      //   AllNFT={this.state.NFTs}
+                      //   currentProfile={this.state.currentProfile}
+                      // />
+                      <h1>Profile</h1>
+                    }
+                  />
+                  {/* <Route
+                    path="profile/settings"
+                    element={
+                      <Settings
+                        uploadProfile={this.uploadProfile}
+                        accountAddress={this.state.accountAddress}
+                        currentProfile={this.state.currentProfile}
+                      />
+                    }
+                  /> */}
+                  <Route
+                    path="content/details/:id"
+                    element={
+                      // <NFTDetails
+                      //   accountAddress={this.state.accountAddress}
+                      //   AllNFT={this.state.NFTs}
+                      //   changeTokenPrice={this.changeTokenPrice}
+                      //   toggleForSale={this.toggleForSale}
+                      //   buyNFT={this.buyNFT}
+                      //   allProfile={this.state.allUserProfile}
+                      // />
+                      <ContentDetails 
+                      accountAddress={this.state.accountAddress}
+                      AllContent={this.state.contents}
+                      buySubscription={this.buySubscription}
+                      />
+                    }
+                  />
                   <Route path="*" element={<NoPage />} />
                 </Route>
               </Routes>
-            </BrowserRouter> */}
+            </BrowserRouter>
           </>
         )}
       </>
