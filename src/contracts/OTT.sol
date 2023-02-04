@@ -24,10 +24,11 @@ contract OTT is ERC721 {
         uint256 contentId;
         string contentName;
         string contentType;
-        string contentDesc;
+        string contentDesc; 
         string subcribedUser;
         string contentThumbnailURI;
         string contentURI;
+        string contentTokenURI;
         address payable currentOwner;
         uint256 price;
         uint256 numberOfViewer;
@@ -67,6 +68,7 @@ struct UserProfile {
         string memory _contentDesc,
         string memory _contentThumbnailURI,
         string memory _contentURI,
+        string memory _contentTokenURI,
         uint256 _price
     ) external {
         ContentCounter++;
@@ -89,6 +91,7 @@ struct UserProfile {
             "",
             _contentThumbnailURI,
             _contentURI,
+            _contentTokenURI,
             msg.sender,
             _price,
             0
@@ -141,6 +144,52 @@ struct UserProfile {
         userprofile.timeOfRegistry = _timestamp;
         allAddress[UserCounter] = _user;
       }
+
+// -------------------
+
+    // // by a token by passing in the token's id
+    function buyToken(uint256 _tokenId, string memory _account) public payable {
+        
+        // check if the token id of the token being bought exists or not
+        require(_exists(_tokenId));
+
+        // get the token's owner
+        address owner = ownerOf(_tokenId);
+
+        // token's owner should not be an zero address account
+        require(owner != address(0));
+
+        // the one who wants to buy the token should not be the token's owner
+        require(owner != msg.sender);
+
+        // get that token from all NFT mapping and create a memory of it defined as (struct => NFT)
+        Content memory nft = allContents[_tokenId];
+
+        // price sent in to buy should be equal to or more than the token's price
+        require(msg.value >= nft.price);
+
+        // transfer the token from owner to the caller of the function (buyer)
+        
+        // _transfer(owner, msg.sender, _tokenId);
+
+        // get owner of the token
+        address payable sendTo = nft.currentOwner;
+
+        // send token's worth of ethers to the owner
+        sendTo.transfer(msg.value);
+
+        // update the token's current owner
+        // nft.currentOwner = msg.sender;
+
+        nft.subcribedUser = _account;
+
+        // update the how many times this token was transfered
+        nft.numberOfViewer += 1;
+
+        // set and update that token in the mapping
+        allContents[_tokenId] = nft;
+    }
+}
 
       allProfiles[_user] = userprofile;
       isProfileSet[_user] = true;
