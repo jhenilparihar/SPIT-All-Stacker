@@ -118,35 +118,7 @@ struct UserProfile {
         return tm;
     }
 
-    // get total number of tokens minted so far
-    function getNumberOfContentMinted() public view returns (uint256) {
-        uint256 total = totalSupply();
-        return total;
-    }
-
-     function addUserProfile(string memory _bannerHash,string memory _imageHash, string memory _name,string memory _bio,address _user,string memory _email,string memory _timestamp) external {
-    // require caller of the function is not an empty address
-      require(msg.sender != address(0));
-      
-      UserCounter ++;
-      
-      UserProfile memory userprofile = allProfiles[_user];
-      
-      userprofile.bannerHash=_bannerHash;
-      userprofile.email=_email;
-      userprofile.imageHash=_imageHash;
-      userprofile.name=_name;
-      userprofile.description=_bio;
-      userprofile.user=_user;
-
-      // add the user's address and it's profile to all allProfiles mapping
-      if (!isProfileSet[_user]){
-        userprofile.timeOfRegistry = _timestamp;
-        allAddress[UserCounter] = _user;
-      }
-
-// -------------------
-
+    
     // // by a token by passing in the token's id
     function buyToken(uint256 _tokenId, string memory _account) public payable {
         
@@ -189,9 +161,35 @@ struct UserProfile {
         // set and update that token in the mapping
         allContents[_tokenId] = nft;
     }
-}
+    
+    // get total number of tokens minted so far
+     function addUserProfile(string memory _bannerHash,string memory _imageHash, string memory _name,string memory _bio,address _user,string memory _email,string memory _timestamp) external {
+    // require caller of the function is not an empty address
+      require(msg.sender != address(0));
+      
+      UserCounter ++;
+      
+      UserProfile memory userprofile = allProfiles[_user];
+      
+      userprofile.bannerHash=_bannerHash;
+      userprofile.email=_email;
+      userprofile.imageHash=_imageHash;
+      userprofile.name=_name;
+      userprofile.description=_bio;
+      userprofile.user=_user;
+
+      // add the user's address and it's profile to all allProfiles mapping
+      if (!isProfileSet[_user]){
+        userprofile.timeOfRegistry = _timestamp;
+        allAddress[UserCounter] = _user;
+      }
 
       allProfiles[_user] = userprofile;
       isProfileSet[_user] = true;
+    }
+// get total number of tokens minted so far
+    function getNumberOfContentMinted() public view returns (uint256) {
+        uint256 total = totalSupply();
+        return total;
     }
 }

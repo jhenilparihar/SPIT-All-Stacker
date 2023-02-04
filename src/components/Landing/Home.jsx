@@ -3,7 +3,7 @@ import './home.css'
 import SideBar from "../SideBar/SideBar";
 import TopNav from "../TopNav/TopNav";
 
-export class Home extends Component {
+class Home extends Component {
 	
 	render() {
 		const items = [1, 2, 3, 4, 5];

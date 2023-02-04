@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import './TopNav.css'
-export class TopNav extends Component {
-  render() {
-    return (
-      <div>
+class TopNav extends Component {
+	render() {
+		return (
+			<div>
 				<div className="topbar">
 					<div className="prev-next-buttons">
 						<button type="button" className="fa fas fa-chevron-left"></button>
 						<button type="button" className="fa fas fa-chevron-right"></button>
 					</div>
-		
+
 					<div className="navbar">
 						<ul>
 							<li>
@@ -29,9 +29,9 @@ export class TopNav extends Component {
 						<button type="button">Log In</button>
 					</div>
 				</div>
-      </div>
-    )
-  }
+			</div>
+		)
+	}
 }
 
 export default TopNav

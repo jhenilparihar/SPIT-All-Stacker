@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './SideBar.css'
 
-export class SideBar extends Component {
+class SideBar extends Component {
 	render() {
 		return (
 			<div>
