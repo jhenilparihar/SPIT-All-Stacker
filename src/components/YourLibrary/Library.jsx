@@ -56,14 +56,14 @@ class Library extends Component {
                         <p class="item-footer">
                           <img class="eth-svg" src={eth} alt="" />{" "}
                           <span>
-                            {/* {window.web3.utils.fromWei(item.price.toString())}{" "} */}
+                            {window.web3.utils.fromWei(item.price.toString())}{" "}
                           </span>
                         </p>
                       </div>
                     </Link>
                   ))}
                 </div>
-              ) : null}
+              ) : <em>No Content</em>}
             </div>
 
             <div className="spotify-playlists">
@@ -80,35 +80,14 @@ class Library extends Component {
                         <p class="item-footer">
                           <img class="eth-svg" src={eth} alt="" />{" "}
                           <span>
-                            {/* {window.web3.utils.fromWei(item.price.toString())}{" "} */}
+                            {window.web3.utils.fromWei(item.price.toString())}{" "}
                           </span>
                         </p>
                       </div>
                     </Link>
                   ))}
               </div>
-              ) : null}
-            </div>
-
-            <div className="spotify-playlists">
-              <h2>Mood</h2>
-              <div className="list">
-                {items.map((item) => (
-                  <div className="item">
-                    <img
-                      class="banner-image"
-                      src="https://images-ext-2.discordapp.net/external/vngWidSdY-_H45PNJFWSKbcC7X5nah_4jyRH2rLZLBY/https/i.pinimg.com/originals/d6/eb/47/d6eb47154e92162fd665442c390a59fd.jpg"
-                    />
-                    <div className="play">
-                      <span className="fa fa-play"></span>
-                    </div>
-                    <h4>Feelin' Good</h4>
-                    <p>Feel good with this positively timeless...</p>
-                  </div>
-                ))}
-              </div>
-
-              <hr />
+              ) : <em>No Contents</em>}
             </div>
           </div>
 

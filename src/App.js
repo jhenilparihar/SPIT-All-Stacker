@@ -177,8 +177,6 @@ class App extends Component {
 
         const ProfileCounter = await OTTContract.methods.UserCounter().call();
 
-        console.log(ProfileCounter);
-
         for (
           var profile_counter = 1;
           profile_counter <= ProfileCounter;
@@ -191,8 +189,6 @@ class App extends Component {
 
           this.state.allUserProfile[address] = profile;
         }
-
-        console.log(this.state.allUserProfile);
 
         this.setState({ loading: false });
       } else {
@@ -229,6 +225,45 @@ class App extends Component {
       //   .ContentCounter()
       //   .call();
       previousTokenId = this.state.totalContentsMinted;
+      const price = window.web3.utils.toWei(tokenPrice.toString(), "ether");
+
+      // -----------------------------------------------
+
+      // main.js
+
+      // POST request using fetch()
+      fetch("https://spithackathon.pythonanywhere.com/login/createcontent/", {
+        // Adding method type
+        method: "POST",
+
+        // Adding body or contents to send
+        body: JSON.stringify({
+          contentType: type,
+          contentName: name,
+          subscribedUser: this.state.accountAddress,
+          contentDesc: desc,
+          contentCategory: category,
+          contentThumbnailURI: tumbnailUrl,
+          price: price,
+          currentOwner: this.state.accountAddress,
+          adult_rate: "",
+          contentURI: contentUrl,
+          numberofViewer: 0,
+          contentId: previousTokenId + 1,
+          contentImage: contentImage,
+        }),
+
+        // Adding headers to the request
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        // Converting to JSON
+        .then((response) => response.json())
+
+        // Displaying results to console
+        .then((json) => console.log(json));
+
       // const tokenId = previousTokenId + 1;
       // const tokenObject = {
       //   tokenName: "OTT Content",
@@ -241,7 +276,7 @@ class App extends Component {
       // };
       // const cid = await client.add(JSON.stringify(tokenObject));
       // let tokenURI = `https://ipfs.infura.io/ipfs/${cid.path}`;
-      const price = window.web3.utils.toWei(tokenPrice.toString(), "ether");
+      // ----------------------------------------------------------------
       this.state.OTTContract.methods
         .createContent(
           name,
@@ -318,7 +353,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.contents);
     return (
       <>
         {!this.state.metamaskConnected ? (

@@ -49,7 +49,6 @@ class Create1 extends Component {
   };
   onthumbChange = async (e) => {
     const file = e.target.files[0];
-    console.log(file);
     try {
       const added = await client.add(file);
       const url = `https://infura-ipfs.io/ipfs/${added.path}`;
@@ -116,7 +115,6 @@ class Create1 extends Component {
   };
   sayHello = async (stat) => {
     this.setState({ category: stat });
-    console.log("cat", this.state.category);
     var element = document.getElementById("user-container");
     element.classList.toggle("mystyle");
   };
@@ -136,7 +134,6 @@ class Create1 extends Component {
   };
 
   render() {
-    console.log(this.state.thumbUrl);
     return (
       <div>
         <div class="main-u">

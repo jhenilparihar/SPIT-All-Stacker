@@ -127,3 +127,6 @@ body {
 .item-footer span {
     font-size:16px;
 }
+.rating {
+  margin-left: 70px;
+}
