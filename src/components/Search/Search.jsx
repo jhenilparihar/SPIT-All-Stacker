@@ -1,7 +1,15 @@
 import React, {Component} from 'react'
 import './Search.css'
+import {Navigate} from "react-router-dom";
 
-export class Search extends Component {
+class Search extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			searchText: ""
+		}
+	}
+	
 	render() {
 		const items = [0, 1, 2, 3, 4];
 		const courses = ['Engineering', 'Science and Technology', 'Medical', 'History', 'JEE/NEET'];
@@ -41,7 +49,23 @@ export class Search extends Component {
 				<div className="main-container">
 					<div className="s-searchbar">
 						
-						<input type="text" placeholder="Search"/>
+						<input type="text" placeholder="Search" onChange={(e) => {
+							this.setState({searchText: e.target.value});
+							let q = `https://spithackathon.pythonanywhere.com/login/searchreommendation/?query=${this.state.searchText}`;
+							fetch(q, {
+								method: 'GET',
+								headers: {
+									'Content-Type': 'application/json'
+								},
+							})
+								.then(response => response.json())
+								.then(data => {
+									console.log(data);
+									console.log('Success!!!!');
+								})
+								.catch(error => console.error(error));
+						}
+						}/>
 					
 					</div>
 					

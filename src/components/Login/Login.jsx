@@ -1,17 +1,26 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import './Login.css'
+import {Navigate} from "react-router-dom";
+
 export class Login extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			username: "",
+			password: ""
+		}
+	}
 	
-	
-  render() {
-    return (
-      <div>
-				<body className="align">
-	
-				<div className="grid">
+	render() {
 		
-					<form action="https://httpbin.org/post" method="POST" className="form login">
-			
+		return (
+			<div>
+				<body className="align">
+				
+				<div className="grid">
+					
+					<div className="form login">
+						
 						<div className="form__field">
 							<label htmlFor="login__username">
 								<svg className="icon">
@@ -19,9 +28,9 @@ export class Login extends Component {
 								</svg>
 								<span className="hidden">Username</span></label>
 							<input autoComplete="username" id="login__username" type="text" name="username" className="form__input"
-										 placeholder="Username" required/>
+										 placeholder="Username" onChange={(e) => this.setState({username: e.target.value})} required/>
 						</div>
-			
+						
 						<div className="form__field">
 							<label htmlFor="login__password">
 								<svg className="icon">
@@ -29,23 +38,42 @@ export class Login extends Component {
 								</svg>
 								<span className="hidden">Password</span></label>
 							<input id="login__password" type="password" name="password" className="form__input" placeholder="Password"
-										 required/>
+										 onChange={(e) => this.setState({password: e.target.value})} required/>
 						</div>
-			
+						
 						<div className="form__field">
-							<input type="submit" value="Sign In"/>
+							<input type="submit" value="Sign In" onClick={() => {
+								fetch('https://spithackathon.pythonanywhere.com/login/login/', {
+									method: 'POST',
+									headers: {
+										'Content-Type': 'application/json'
+									},
+									body: JSON.stringify({
+										'username': this.state.username,
+										'password': this.state.password,
+									})
+								})
+									.then(response => response.json())
+									.then(data => {
+										console.log(data);
+										console.log('Success!!!!');
+										<Navigate replace to={'../'}/>
+									})
+									.catch(error => console.error(error));
+							}
+							}/>
 						</div>
-		
-					</form>
-		
+					
+					</div>
+					
 					<p className="text--center">Not a member? <a href="#">Sign up now</a>
 						<svg className="icon">
 							<use xlinkHref="#icon-arrow-right"></use>
 						</svg>
 					</p>
-	
+				
 				</div>
-	
+				
 				<svg xmlns="http://www.w3.org/2000/svg" className="icons">
 					<symbol id="icon-arrow-right" viewBox="0 0 1792 1792">
 						<path
@@ -60,11 +88,11 @@ export class Login extends Component {
 							d="M1600 1405q0 120-73 189.5t-194 69.5H459q-121 0-194-69.5T192 1405q0-53 3.5-103.5t14-109T236 1084t43-97.5 62-81 85.5-53.5T538 832q9 0 42 21.5t74.5 48 108 48T896 971t133.5-21.5 108-48 74.5-48 42-21.5q61 0 111.5 20t85.5 53.5 62 81 43 97.5 26.5 108.5 14 109 3.5 103.5zm-320-893q0 159-112.5 271.5T896 896 624.5 783.5 512 512t112.5-271.5T896 128t271.5 112.5T1280 512z"/>
 					</symbol>
 				</svg>
-	
+				
 				</body>
-      </div>
-    )
-  }
+			</div>
+		)
+	}
 }
 
 export default Login

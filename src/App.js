@@ -6,7 +6,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 // import "./components/bootstrap/css/bootstrap.css";
 import "./App.css";
-
+import Landing from "./components/Landing/Landing";
 import Web3 from "web3";
 import OTT from "./abis/OTT.json";
 import ContractNotDeployed from "./components/ContractNotDeployed/ContractNotDeployed";
@@ -377,6 +377,14 @@ class App extends Component {
                 >
                   <Route
                     index
+                    element={
+                      <>
+                       <Landing /> 
+                      </>
+                    }
+                  />
+                  <Route
+                     path="/dashboard"
                     element={
                       <>
                         <SideBar />
