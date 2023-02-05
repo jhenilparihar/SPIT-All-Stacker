@@ -16,11 +16,12 @@ import NoPage from "./components/NoPage/NoPage";
 import Create1 from "./components/create/Create1";
 import Marketplace from "./components/Explore/Marketplace";
 import ContentDetails from "./components/contentDetails/contentDetails";
-import TopNav from "./components/TopNav/TopNav";
 import SideBar from "./components/SideBar/SideBar";
 import Profile from "./components/user/profile";
 import Settings from "./components/user/Setting";
 import Home from "./components/Landing/Home";
+import Search from "./components/Search/Search";
+import Library from "./components/YourLibrary/Library";
 
 const projectId = "2LEiWo06lqrPLBn4x5fxBHwMDgg";
 const projectSecret = "c567bca7714ae367126c8b266fe86cab";
@@ -250,7 +251,8 @@ class App extends Component {
           tumbnailUrl,
           contentImage,
           contentUrl,
-          price
+          price,
+          this.state.accountAddress
         )
         .send({ from: this.state.accountAddress })
         .on("confirmation", () => {
@@ -259,10 +261,8 @@ class App extends Component {
           window.location.reload();
         });
     } else {
-      if (contentIsUsed) {
-        this.setState({ contentIsUsed: true });
-        this.setState({ loading: false });
-      }
+      this.setState({ contentIsUsed: true });
+      this.setState({ loading: false });
     }
   };
 
@@ -341,47 +341,52 @@ class App extends Component {
                     </>
                   }
                 >
-                  <Route index element={<><TopNav
-                    currentProfile={this.state.currentProfile}
-                  />
-                    <SideBar /><Home accountAddress={this.state.accountAddress}
-                      AllContents={this.state.contents} /></>} />
-
                   <Route
-                    path="marketplace"
+                    index
                     element={
-                      <Marketplace
-                        accountAddress={this.state.accountAddress}
-                        AllContents={this.state.contents}
-                        totalTokensMinted={this.state.OTTCount}
-                      />
+                      <>
+                        <SideBar />
+                        <Home
+                          accountAddress={this.state.accountAddress}
+                          AllContents={this.state.contents}
+                        />
+                      </>
                     }
                   />
 
                   <Route
                     path="create"
-                    element={<>
-                      <TopNav
-                        currentProfile={this.state.currentProfile}
-                      />
-                      <SideBar />
-                      <Create1 createContent={this.createContent} /></>}
+                    element={
+                      <>
+                        <SideBar />
+                        <Create1
+                          createContent={this.createContent}
+                          contentIsUsed={this.state.contentIsUsed}
+                        />
+                      </>
+                    }
                   />
 
                   <Route
                     path="content/details/:id"
                     element={
-                      <ContentDetails
-                        accountAddress={this.state.accountAddress}
-                        AllContent={this.state.contents}
-                        buySubscription={this.buySubscription}
-                      />
+                      <>
+                        <SideBar />
+                        <ContentDetails
+                          accountAddress={this.state.accountAddress}
+                          AllContent={this.state.contents}
+                          buySubscription={this.buySubscription}
+                        />
+                      </>
                     }
                   />
                   <Route
                     path="/profile"
                     element={
-                      <Profile currentProfile={this.state.currentProfile} />
+                      <>
+                        <SideBar />
+                        <Profile currentProfile={this.state.currentProfile} />
+                      </>
                     }
                   />
                   <Route
@@ -392,6 +397,27 @@ class App extends Component {
                         accountAddress={this.state.accountAddress}
                         currentProfile={this.state.currentProfile}
                       />
+                    }
+                  />
+                  <Route
+                    path="/search"
+                    element={
+                      <>
+                        <SideBar />
+                        <Search />
+                      </>
+                    }
+                  />
+                  <Route
+                    path="/library"
+                    element={
+                      <>
+                        <SideBar />
+                        <Library
+                          accountAddress={this.state.accountAddress}
+                          AllContents={this.state.contents}
+                        />
+                      </>
                     }
                   />
 
