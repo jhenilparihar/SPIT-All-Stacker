@@ -2,7 +2,7 @@
 <h1 align="center"> Stream.it </h1>
 
  <p align="center">
-<img src="https://readme-typing-svg.herokuapp.com?font=monospace&color=92B6FE&size=25&vCenter=true&lines=Issuance+of+Certificate;Appliance+of+Certificate"alt="Verification+of+Certificate">
+<img src="https://readme-typing-svg.herokuapp.com?font=monospace&color=92B6FE&size=25&vCenter=true&lines=Issuance+of+Content;>
 </p>
 </p>
 <h3 align="center"> Blockchain based OTT Platform<h3>
