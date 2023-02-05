@@ -20,16 +20,16 @@ class TopNav extends Component {
 					<div className="navbar">
 						<ul>
 							
-							<li>
+							{/* <li>
 								<a href="/create">Create</a>
 							</li>
-							
-							<li className="divider">|</li>
+							 */}
+							{/* <li className="divider">|</li> */}
 							{/* <li>
 								<a href="#">Sign Up</a>
 							</li> */}
 						</ul>
-						<Link to={"/profile"}>
+						{/* <Link to={"/profile"}>
 							{this.props.currentProfile !== undefined ? (<div class="prof1-button" >
 								<div class="prof1-img">
 									{this.props.currentProfile.imageHash !== undefined ? (
@@ -46,7 +46,7 @@ class TopNav extends Component {
 								</>}
 							</div>) : null}
 
-						</Link>
+						</Link> */}
 					</div>
 				</div>
 			</div>
