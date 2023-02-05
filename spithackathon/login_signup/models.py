@@ -37,6 +37,7 @@ class contentdetails(models.Model):
 	review = models.TextField(null=True,blank=True)
 	tags = models.TextField(null=True,blank=True)
 	adult_rate = models.TextField(null=True,blank=True)
+	adult_type = models.TextField(null=True,blank=True)
 	thumbnail =  models.ImageField(null=True,blank=True)
 	trailer = models.FileField(upload_to=path_and_rename_for_resume,null=True,blank=True)
 	main_video = models.FileField(upload_to=path_and_rename_for_resume,null=True,blank=True)

@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import path
-from .views import RegistrationAPI,LoginAPI, UserAPI,createprofile,profileDetail,createcontentdetails,contentDetaildetails,ratingreommendation,contentrecommendation,searchreommendation,moodbasedreommendation
+from .views import RegistrationAPI,LoginAPI, UserAPI,createprofile,profileDetail,createcontentdetails,contentDetaildetails,ratingreommendation,contentrecommendation,searchreommendation,moodbasedreommendation,newsapi
 from knox import views as knox_views
 
 urlpatterns = [
@@ -19,5 +19,6 @@ urlpatterns = [
     path('contentrating/',contentrecommendation.as_view(),name='contentrating'),
     path('ratingreommendation/',ratingreommendation.as_view(),name='rating'),
     path('searchreommendation/',searchreommendation.as_view(),name='search'),
-    path('moodbasedreommendation/',moodbasedreommendation.as_view(),name='search')
+    path('moodbasedreommendation/',moodbasedreommendation.as_view(),name='search'),
+    path('nuditychecker/',newsapi.as_view(),name='news'),
 ]
