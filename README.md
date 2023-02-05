@@ -47,7 +47,6 @@
  ### Dashboard Page
 - All the Created contents by the Admin will be listed on the dashboard.
 - user can earn through the content created by it.
-- Admin can apply multiple filters such as filter by Department,Passout year,SAP.
 - User can search for its liked contents.
  <p align="center">
  
