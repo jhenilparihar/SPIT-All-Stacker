@@ -71,7 +71,8 @@ struct UserProfile {
         string memory _contentThumbnailURI,
         string memory _contentImage,
         string memory _contentURI,
-        uint256 _price
+        uint256 _price,
+        string memory _accountAddress
     ) external {
         ContentCounter++;
 
@@ -91,7 +92,7 @@ struct UserProfile {
             _contentType,
             _contentCategory,
             _contentDesc,
-            "",
+            _accountAddress,
             _contentThumbnailURI,
             _contentImage,
             _contentURI,

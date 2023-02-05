@@ -31,39 +31,50 @@ class SideBar extends Component {
 							</li>
 							
 							<li>
-								<a href="#">
+							<Link to="/create">
+									<span className="fa fas fa-book"></span>
+									<span>Upload</span>
+								</Link>
+							</li>
+
+							<li>
+							<Link to="/library">
 									<span className="fa fas fa-book"></span>
 									<span>Your Library</span>
+								</Link>
+							</li>
+
+							<li>
+								<a href="#">
+									<span className="fa fas fa-book"></span>
+									<span>Group Streaming</span>
 								</a>
 							</li>
+
+							<li>
+							<Link to="/profile">
+									<span className="fa fas fa-book"></span>
+									<span>Profile</span>
+								</Link>
+							</li>
+
+							<li>
+								<a href="#">
+									<span className="fa fas fa-book"></span>
+									<span>History</span>
+								</a>
+							</li>
+
+							
 						</ul>
 					</div>
 					
-					<div className="navigation">
-						<ul>
-							<li>
-								<a href="#">
-									<span className="fa fas fa-plus-square"></span>
-									<span>Create Playlist</span>
-								</a>
-							</li>
-							
-							<li>
-								<a href="#">
-									<span className="fa fas fa-heart"></span>
-									<span>Liked Songs</span>
-								</a>
-							</li>
-						</ul>
-					</div>
 					
 					<div className="policies">
 						<ul>
 							<li>
-								<a href="#">Cookies</a>
-							</li>
-							<li>
-								<a href="#">Privacy</a>
+								<a href="#">Cookies</a>{" "}{" "}
+								{" "}<a href="#">{" "}Privacy</a>
 							</li>
 						</ul>
 					</div>

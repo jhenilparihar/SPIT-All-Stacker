@@ -1,23 +1,24 @@
 import React, { Component } from "react";
-import { useState } from 'react'
-import { create } from 'ipfs-http-client'
-import { Buffer } from 'buffer'
+import { useState } from "react";
+import { create } from "ipfs-http-client";
+import { Buffer } from "buffer";
 import "./style.css";
 
-
-const projectId = "2LEiWo06lqrPLBn4x5fxBHwMDgg"
-const projectSecret = "c567bca7714ae367126c8b266fe86cab"
-const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
-const src = "https://infura-ipfs.io/ipfs/QmaxfZNigeYpkQXkGdErsHkmNDSG4YeHyTojvsCpYgVwgH";
+const projectId = "2LEiWo06lqrPLBn4x5fxBHwMDgg";
+const projectSecret = "c567bca7714ae367126c8b266fe86cab";
+const auth =
+  "Basic " + Buffer.from(projectId + ":" + projectSecret).toString("base64");
+const src =
+  "https://infura-ipfs.io/ipfs/QmaxfZNigeYpkQXkGdErsHkmNDSG4YeHyTojvsCpYgVwgH";
 
 const client = create({
-  host: 'ipfs.infura.io',
+  host: "ipfs.infura.io",
   port: 5001,
-  protocol: 'https',
+  protocol: "https",
   headers: {
     authorization: auth,
   },
-})
+});
 
 class Create1 extends Component {
   constructor(props) {
@@ -30,46 +31,47 @@ class Create1 extends Component {
       thumbUrl: "",
       description: "",
       imageIsUpload: false,
-      category: ""
+      category: "",
     };
   }
   // const [fileUrl, updateFileUrl] = useState(``)
   onChange = async (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     try {
-      const added = await client.add(file)
-      const url = `https://infura-ipfs.io/ipfs/${added.path}`
-      this.setState({ fileUrl: url })
+      const added = await client.add(file);
+      const url = `https://infura-ipfs.io/ipfs/${added.path}`;
+      this.setState({ fileUrl: url });
       //   updateFileUrl(url)
-      console.log("IPFS URI of trailer: ", url)
+      console.log("IPFS URI of trailer: ", url);
     } catch (error) {
-      console.log('Error uploading file: ', error)
+      console.log("Error uploading file: ", error);
     }
-  }
+  };
   onthumbChange = async (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
+    console.log(file);
     try {
-      const added = await client.add(file)
-      const url = `https://infura-ipfs.io/ipfs/${added.path}`
-      this.setState({ thumbUrl: url })
+      const added = await client.add(file);
+      const url = `https://infura-ipfs.io/ipfs/${added.path}`;
+      await this.setState({ thumbUrl: url });
       //   updateFileUrl(url)
-      console.log("IPFS URI of thumb:", url)
+      console.log("IPFS URI of thumb:", url);
     } catch (error) {
-      console.log('Error uploading file: ', error)
+      console.log("Error uploading file: ", error);
     }
-  }
+  };
   ontrailChange = async (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     try {
-      const added = await client.add(file)
-      const url = `https://infura-ipfs.io/ipfs/${added.path}`
-      this.setState({ trailerUrl: url })
+      const added = await client.add(file);
+      const url = `https://infura-ipfs.io/ipfs/${added.path}`;
+      this.setState({ trailerUrl: url });
       //   updateFileUrl(url)
-      console.log("IPFS URI of trailer: ", url)
+      console.log("IPFS URI of trailer: ", url);
     } catch (error) {
-      console.log('Error uploading file: ', error)
+      console.log("Error uploading file: ", error);
     }
-  }
+  };
 
   DropDown = () => {
     const dropdowns = document.querySelectorAll(".dropdown1");
@@ -111,13 +113,13 @@ class Create1 extends Component {
   drop = (e) => {
     var element = document.getElementById("user-container");
     element.classList.toggle("mystyle");
-  }
+  };
   sayHello = async (stat) => {
-    await this.setState({ category: stat });
+    this.setState({ category: stat });
     console.log("cat", this.state.category);
     var element = document.getElementById("user-container");
     element.classList.toggle("mystyle");
-  }
+  };
   callCreateFromApp = (e) => {
     e.preventDefault();
 
@@ -125,56 +127,25 @@ class Create1 extends Component {
       this.state.NFTName,
       "Horror",
       this.state.category,
-      this.state.description, 
+      this.state.description,
       this.state.trailerUrl,
       this.state.fileUrl,
       this.state.thumbUrl,
-      this.state.NFTPrice,
+      this.state.NFTPrice
     );
   };
 
   render() {
+    console.log(this.state.thumbUrl);
     return (
-      // <div className="App">
-      //   <h1>IPFS Example</h1>
-      //   <input
-      //     type="file"
-      //     onChange={this.onChange}
-      //   />
-      //   {
-      //     this.state.fileUrl && (
-      //       <div>
-
-      //         <img src={this.state.fileUrl} width="600px" />
-      //         <a href={this.state.fileUrl} target="_blank">{this.state.fileUrl}</a>
-      //       </div>
-
-      //     )
-      //   }
-      //   {
-      //     this.state.fileUrl && (
-      //       <div>
-      //          <iframe
-      //   width="560"
-      //   height="315"
-      //   src={src}
-      //   title="Youtube Player"
-      //   frameborder="0"
-      //   allowFullScreen
-      // />
-      //       </div>
-
-      //     )
-      //   }
-
-      // </div>
-
       <div>
         <div class="main-u">
           <div class="inner-u">
             <div class="form-c">
               <form onSubmit={this.callMintMyNFTFromApp}>
-                <h1>Create <span id="unique">New</span>  <span id="">Item</span></h1>
+                <h1>
+                  Create <span id="unique">New</span> <span id="">Item</span>
+                </h1>
                 <p class="sub-head">
                   <span class="highlight">* </span>Required fields{" "}
                 </p>
@@ -182,8 +153,7 @@ class Create1 extends Component {
                   {/*  */}
                   <label for="b2" class="head">
                     {" "}
-                    Full Video{" "}
-                    <span class="highlight">*</span>
+                    Full Video <span class="highlight">*</span>
                   </label>
                   <p class="sub-head">
                     File types supported: JPG, PNG, GIF, SVG, MP4, WEBM, MP3,
@@ -198,52 +168,43 @@ class Create1 extends Component {
                     />
                   </div>
                   {/*  */}
-
                 </div>
                 <div class="banner-image1">
                   <label for="b2" class="head1">
                     {" "}
-                    Trailer{" "}
-                    <span class="highlight">*</span>
+                    Trailer <span class="highlight">*</span>
                   </label>
                   <div id="b2" class="nft-image1">
                     {/* <img class="img-uploaded1" src={this.state.fileUrl} alt=""/> */}
                     <div class="variants">
-                      <div class='file file--upload'>
-                        <label for='input-file'>
-                          Upload 
-                        </label>
-                        <input id='input-file' type='file' onChange={this.ontrailChange}/>
+                      <div class="file file--upload">
+                        <label for="input-file">Upload</label>
+                        <input
+                          id="input-file"
+                          type="file"
+                          onChange={this.ontrailChange}
+                        />
                       </div>
                     </div>
-                    {/* <input
-                      class="img-fileInput1"
-                      type="file"
-                      onChange={this.ontrailChange}
-                    /> */}
                   </div>
                 </div>
                 <div class="banner-image1">
                   <label for="b2" class="head1">
                     {" "}
-                    Thumnail{" "}
-                    <span class="highlight">*</span>
+                    Thumnail <span class="highlight">*</span>
                   </label>
                   <div id="b2" class="nft-image1">
                     {/* <img class="img-uploaded1" src={this.state.fileUrl} alt=""/> */}
                     <div class="variants">
-                      <div class='file file--uploading'>
-                        <label for='input-file'>
-                          Upload 
-                        </label>
-                        <input id='input-file' type='file' onChange={this.onthumbChange}/>
+                      <div class="file file--uploading">
+                        <label for="input-file2">Upload</label>
+                        <input
+                          id="input-file2"
+                          type="file"
+                          onChange={this.onthumbChange}
+                        />
                       </div>
                     </div>
-                    {/* <input
-                      class="img-fileInput1"
-                      type="file"
-                      onChange={this.ontChange}
-                    /> */}
                   </div>
                 </div>
                 <label for="text-1542372332072" class="head">
@@ -293,41 +254,53 @@ class Create1 extends Component {
 	</a> */}
 
                     <div class="user">
-                    <label for="text-1542372332072" class="head">
-                  Category <span class="highlight">*</span>
-                </label>
+                      <label for="text-1542372332072" class="head">
+                        Category <span class="highlight">*</span>
+                      </label>
                       <div class="user-trigger" onClick={this.drop}>
                         <div class="avatar"></div>
-                        
+
                         <div class="detail">
                           <strong>Category</strong>
                           @typeof
                         </div>
-                        <button class="btn btn-default squared"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                          <path fill="none" d="M0 0h24v24H0z" />
-                          <path d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z" />
-                        </svg></button>
+                        <button class="btn btn-default squared">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            width="24"
+                            height="24"
+                          >
+                            <path fill="none" d="M0 0h24v24H0z" />
+                            <path d="M12 13.172l4.95-4.95 1.414 1.414L12 16 5.636 9.636 7.05 8.222z" />
+                          </svg>
+                        </button>
                       </div>
                       <div class="user-container" id="user-container">
-                        <a onClick={() => {
-                          this.sayHello("Romance");
-                        }}>
+                        <a
+                          onClick={() => {
+                            this.sayHello("Romance");
+                          }}
+                        >
                           {/* <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" alt=""> */}
                           <strong>Romance</strong>@Rmantic
                         </a>
-                        <a onClick={() => {
-                          this.sayHello("Notional");
-                        }}>
+                        <a
+                          onClick={() => {
+                            this.sayHello("Notional");
+                          }}
+                        >
                           {/* <img src="https://cdn.freebiesupply.com/logos/large/2x/dribbble-icon-1-logo-png-transparent.png" alt=""> */}
                           <strong>Notional</strong>@Indian
                         </a>
-                        <a onClick={() => {
-                          this.sayHello("Action");
-                        }}>
+                        <a
+                          onClick={() => {
+                            this.sayHello("Action");
+                          }}
+                        >
                           {/* <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt=""> */}
                           <strong>Action</strong>@Movie
                         </a>
-
                       </div>
                     </div>
                   </div>
@@ -353,7 +326,10 @@ class Create1 extends Component {
                 </div>
                 <hr></hr>
                 <br />
-                {!(this.state.fileUrl.length > 0 && this.state.trailerUrl.length > 0) ? (
+                {!(
+                  this.state.fileUrl.length > 0 &&
+                  this.state.trailerUrl.length > 0
+                ) ? (
                   <button
                     type="submit"
                     class="create-btn create-btn-disabled"
@@ -362,13 +338,17 @@ class Create1 extends Component {
                     Create NFT
                   </button>
                 ) : (
-                  <button type="submit" class="create-btn" onClick={this.callCreateFromApp}>
+                  <button
+                    type="submit"
+                    class="create-btn"
+                    onClick={this.callCreateFromApp}
+                  >
                     Create NFT
                   </button>
                 )}
 
-                {/* <div className="mt-4">
-                  {this.props.nameIsUsed ? (
+                <div className="mt-4">
+                  {this.props.contentIsUsed ? (
                     <div className="alert alert-danger alert-dissmissible">
                       <button
                         type="button"
@@ -377,21 +357,10 @@ class Create1 extends Component {
                       >
                         <span>&times;</span>
                       </button>
-                      <strong>This name is taken!</strong>
-                    </div>
-                  ) : this.props.imageIsUsed ? (
-                    <div className="alert alert-danger alert-dissmissible">
-                      <button
-                        type="button"
-                        className="close"
-                        data-dismiss="alert"
-                      >
-                        <span>&times;</span>
-                      </button>
-                      <strong>This Image is taken!</strong>
+                      <strong>This Content already exists !</strong>
                     </div>
                   ) : null}
-                </div> */}
+                </div>
               </form>
             </div>
           </div>

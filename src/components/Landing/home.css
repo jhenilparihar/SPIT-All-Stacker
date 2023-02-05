@@ -51,13 +51,13 @@ body {
 }
 .spotify-playlists .list .item .play .fa {
   position: absolute;
-  right: 10px;
-  top: -60px;
-  padding: 18px;
-  background-color: #1db954;
-  border-radius: 100%;
-  opacity: 0;
-  transition: all ease 0.4s;
+    right: 50px;
+    top: -92px;
+    padding: 22px;
+    background-color: #ffffff75;
+    border-radius: 100%;
+    opacity: 0;
+    transition: all ease 0.4s;
 }
 .spotify-playlists .list .item:hover .play .fa {
   opacity: 1;

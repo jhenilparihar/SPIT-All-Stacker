@@ -12,12 +12,15 @@ body {
 .main-container {
     margin-left: 245px;
     margin-bottom: 100px;
+    margin-top: 40px;
 }
 
 .s-searchbar {
     padding: 5px;
     border-radius: 16px;
     margin-bottom: 20px;
+    
+
 }
 .s-searchbar input{
     width: 400px;

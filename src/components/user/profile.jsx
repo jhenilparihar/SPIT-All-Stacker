@@ -19,7 +19,7 @@ class Profile extends Component {
             <>
             <div className="con">
                 <div className="side">
-                <TopNav />
+                
                 </div>
                 {this.props.currentProfile !== undefined ? (<div class="main">
                     <div class="upper">
@@ -78,9 +78,9 @@ class Profile extends Component {
                             <img class="icons" src={share} alt="" />
                         </div>
                         <div class="settings__Icon">
-                            {/* <Link to="/profile/settings"> */}
+                            <Link to="/setting">
                             <img class="icons" src={setting} alt="" />
-                            {/* </Link> */}
+                            </Link>
                         </div>
                     </div>
                     {/* <DisplayNFT AllNFT={AllNFT} profileAddress={currentProfile.user} /> */}
