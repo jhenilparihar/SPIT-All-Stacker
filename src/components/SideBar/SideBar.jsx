@@ -8,10 +8,11 @@ class SideBar extends Component {
 			<div>
 				<div className="sidebar">
 					<div className="logo">
-						<a href="#">
-							<img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png"
-									 alt="Logo"/>
-						</a>
+					<Link to="/">
+						<div >
+							<h1 class="stlogo"><span class="stlogo1">Stream</span><span class="stlogo2">.it</span></h1>
+						</div>
+						</Link>
 					</div>
 					
 					<div className="navigation">

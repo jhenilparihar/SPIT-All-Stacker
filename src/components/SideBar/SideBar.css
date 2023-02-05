@@ -64,3 +64,17 @@
 .sidebar .policies ul li a:focus {
     text-decoration: underline;
 }
+.stlogo{
+    text-decoration: none;
+    color: white;
+    font-family: 'Yeseva One', cursive;
+}
+.stlogo1{
+    color: rgb(129, 162, 239);
+}
+.stlogo2{
+    color: rgb(238, 178, 123);
+}
+a{
+    text-decoration: none;
+}
